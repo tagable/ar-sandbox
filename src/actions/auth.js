@@ -1,5 +1,4 @@
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from './types';
-import { Link } from 'react-router-dom';
 import api from './api';
 import setAuthorizationHeader from '../utils/setAuthorizationHeader';
 
@@ -24,5 +23,4 @@ export const logout = () => dispatch =>{
     localStorage.removeItem('arabsandboxJWT');
     setAuthorizationHeader();
     dispatch(userLoggedOut());
-
 };

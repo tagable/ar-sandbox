@@ -57,15 +57,12 @@ class MyNav extends Component {
 
           	{ user && 
           	<Menu.Item
-          		onClick={() => logout()}
+          		onClick={() => logout() }
           	>
           	  Logout
           	</Menu.Item>}
 
-
-          
-        </Menu>
-        
+        </Menu>        
       </header>
     );
   }
@@ -73,7 +70,7 @@ class MyNav extends Component {
 
 function mapStateToProps(state) {
 	return {
-		user: !!state.user
+		user: !!state.user.username
 	}
 }
 
