@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux';
-
-const data = {
-    name: "Roman"
-}
+import user from './user';
 
 export default combineReducers({
-    user: data
+    user
 });
