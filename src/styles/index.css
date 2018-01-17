@@ -5551,3 +5551,11 @@ a.text-dark:focus, a.text-dark:hover {
 
 .invisible {
   visibility: hidden !important; }
+
+.myCard {
+  background: #f4eee3 !important; }
+
+.footer {
+  background: #434c5b;
+  color: #fff;
+  padding: 2em; }

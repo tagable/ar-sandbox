@@ -4,3 +4,20 @@
 // My Bootstrap configuration
 @import 'custom_bootstrap';
 
+$my-footer-bg: #434c5b;
+$my-card-bg: #f4eee3;
+
+#myNav-Menu {
+	// background: transparent url('../img/nav-bg.png') left top no-repeat;
+	// background: url('../img/nav-bg.png') !important;
+}
+
+.myCard {
+	background: $my-card-bg !important;
+}
+
+.footer {
+	background: $my-footer-bg;
+	color: #fff;
+	padding: 2em;
+}

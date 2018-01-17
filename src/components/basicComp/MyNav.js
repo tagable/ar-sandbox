@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Message, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout }  from '../../actions/auth';
@@ -13,27 +13,27 @@ class MyNav extends Component {
 
   render() {
   	const { activeItem } = this.state;
-  	const { user, logout } = this.props;
+  	const { user, logout, isConfirmed, isAuthenticated } = this.props;
     return (
     	<header>
-      	<Menu stackable>
+      	<Menu stackable id="myNav-Menu">
           <Menu.Item>
             <img src={Logo} alt="Ar-SandBox" />
           </Menu.Item>
 
           <Menu.Item
-          	as={Link} 
+          	as={Link}
           	to="/"
             name='home'
-            active={activeItem === 'home'}
+            active={activeItem === 'home' || activeItem === undefined}
             onClick={this.handleItemClick}
           >
             Home
           </Menu.Item>
 
-          { !user && 
+          { !user &&
           	<Menu.Item
-          		as={Link} 
+          		as={Link}
           		to="/signup"
           	  name='signup'
           	  active={activeItem === 'signup'}
@@ -41,11 +41,11 @@ class MyNav extends Component {
           	>
           	  Signup
           	</Menu.Item>}
-          	
-          	
-          	{ !user && 
+
+
+          	{ !user &&
           	<Menu.Item
-          		as={Link} 
+          		as={Link}
           		to="/login"
           	  name='login'
           	  active={activeItem === 'login'}
@@ -55,14 +55,23 @@ class MyNav extends Component {
           	</Menu.Item>}
 
 
-          	{ user && 
+          	{ user &&
           	<Menu.Item
           		onClick={() => logout() }
           	>
           	  Logout
           	</Menu.Item>}
 
-        </Menu>        
+        </Menu>
+        <Container>
+          {isAuthenticated && !isConfirmed && <Message
+            icon='inbox'
+            size="medium"
+            header='Have you confirmed you email with us?'
+            content='Please check your email to confirm your email with us'
+          />}
+          <br/>
+        </Container>
       </header>
     );
   }
@@ -70,7 +79,9 @@ class MyNav extends Component {
 
 function mapStateToProps(state) {
 	return {
-		user: !!state.user.username
+		user: !!state.user.username,
+    isConfirmed: !!state.user.confirmed,
+    isAuthenticated: !!state.user.username
 	}
 }
 
