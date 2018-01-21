@@ -8,7 +8,9 @@ import LoginPage from './pages/LoginPage';
 import ForgetPasswordPage from './pages/ForgetPasswordPage';
 import ConfirmationPage from './pages/ConfirmationPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import CodePage from './pages/CodePage';
 import GuestRoute from './routes/GuestRoute';
+import UserRoute from './routes/UserRoute';
 import MyNav from './basicComp/MyNav';
 
 const App = ({location}) => (
@@ -20,6 +22,8 @@ const App = ({location}) => (
   <GuestRoute location={location} path="/forget_password" exact component={ForgetPasswordPage}/>
   <GuestRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage}/>
   <GuestRoute location={location} path="/reset_password/:token" exact component={ResetPasswordPage}/>
+  <UserRoute location={location} path="/code-list" exact component={CodePage} />
+
   <Container fluid className="footer">
     <center>Footer</center>
   </Container>

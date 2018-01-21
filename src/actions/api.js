@@ -18,6 +18,10 @@ export default {
 
     setNewPassword: (data) => axios.post('/api/auth/set_new_password', {data})
   },
+  coder: {
+    loadCoderList: () => 
+      axios.get('/api/coder/coder-list').then(res => res.data.data)
+  }
   // books: {
   //   fetchAll: () => axios.get('/api/books').then(res => res.data.books),
 
