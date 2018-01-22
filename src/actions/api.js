@@ -20,7 +20,10 @@ export default {
   },
   coder: {
     loadCoderList: () => 
-      axios.get('/api/coder/coder-list').then(res => res.data.data)
+      axios.get('/api/coder/coder-list').then(res => res.data.data),
+
+      loadCoderInfo: (data) => axios.post('/api/coder/coder-info', data)
+        .then(res => res.data.coder)
   }
   // books: {
   //   fetchAll: () => axios.get('/api/books').then(res => res.data.books),

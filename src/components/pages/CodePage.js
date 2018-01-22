@@ -23,7 +23,7 @@ class CodePage extends Component {
       <h1>Code List Page</h1>
       <List celled>
       	{this.props.coderList && this.props.coderList.map((val, index) => {
-          return <CodeListTitlePage key={index} codes={val}/>
+          return <CodeListTitlePage key={index} codes={val} id={index}/>
         })}
       </List>
       

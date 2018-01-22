@@ -1,12 +1,22 @@
-import { CODER_LOADED_LIST } from './types';
+import { CODER_LOADED_LIST, CODER_LOADED_INFO } from './types';
 import api from './api';
 
-export const CodeListLoaded = (coders) => ({
+export const codeListLoaded = (coders) => ({
 	type: CODER_LOADED_LIST,
 	coders
 });
 
+export const coderInfoLoaded = (coder) => ({
+	type: CODER_LOADED_INFO,
+	coder
+});
+
 export const loadCoderList = () => (dispatch) => 
 	api.coder.loadCoderList().then(codersList => {
-		dispatch(CodeListLoaded(codersList));
+		dispatch(codeListLoaded(codersList));
 	});
+
+export const loadCoderInfo = (data) => (dispatch) => 
+	api.coder.loadCoderInfo(data).then(coderInfo => {
+		dispatch(coderInfoLoaded(coderInfo))
+	})
