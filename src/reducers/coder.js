@@ -1,4 +1,4 @@
-import { CODER_LOADED_LIST, CODER_LOADED_INFO } from '../actions/types';
+import { CODER_LOADED_LIST, CODER_LOADED_INFO, CODER_LOADED_SUBMIT } from '../actions/types';
 
 export default function coders(state = [], action = {}) {
   switch (action.type) {
@@ -14,6 +14,7 @@ export default function coders(state = [], action = {}) {
 export function coder(state = {}, action = {}) {
   switch(action.type) {
     case CODER_LOADED_INFO:
+    case CODER_LOADED_SUBMIT:
       return action.coder;
 
     default:

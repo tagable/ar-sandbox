@@ -54,6 +54,16 @@ class MyNav extends Component {
           	  Login
           	</Menu.Item>}
 
+						{ user &&
+							<Menu.Item
+								as={Link}
+								to="/code-list"
+								name='code-list'
+								active={activeItem === 'code-list'}
+								onClick={this.handleItemClick}
+							>
+								List
+							</Menu.Item>}
 
           	{ user &&
           	<Menu.Item

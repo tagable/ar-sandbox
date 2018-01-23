@@ -8,6 +8,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { List } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import CodeListTitlePage from './coder/CodeListTitlePage';
 import { loadCoderList } from '../../actions/coders';
 
@@ -32,7 +33,7 @@ class CodePage extends Component {
 }
 
 CodePage.propTypes = {
-  
+  loadCoderList: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

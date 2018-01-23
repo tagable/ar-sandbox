@@ -9,19 +9,27 @@
 
 
 import React, { Component } from 'react';
-import { Form, Button, Message } from 'semantic-ui-react';
+import { Form, Button, Message, TextArea } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import InlineError from '../messages/InlineError';
+// import InlineError from '../messages/InlineError';
 
-class LoginForm extends Component {
+class CodeInfoForm extends Component {
   state = {
     data: {
-      username: '',
-      password: '',
+      code: this.props.code
     },
     loading: false,
     errors: {}
   };
+
+  componentWillReceiveProps(nextProps){
+    console.log("this", this.porps, "nextProps", nextProps);
+    this.setState({
+      data: {
+        code: nextProps.code
+      }
+    })
+  }
 
   onChange = e => {
     this.setState({
@@ -35,7 +43,8 @@ class LoginForm extends Component {
     this.setState({ errors });
     if(Object.keys(errors).length === 0){
       this.setState({ loading: true });
-      this.props.submit(this.state.data)
+      this.props.submit(this.state.data.code)
+        .then(() => this.setState({ loading: false}))
         .catch(err =>
           this.setState({ errors: err.response.data.errors, loading: false })
         );
@@ -44,13 +53,14 @@ class LoginForm extends Component {
 
   validate = data => {
     const errors = {}
-    if(!data.username) errors.username = "Can't be blank";
-    if(!data.password) errors.password = "Can't be blank";
+    // if(!data.username) errors.username = "Can't be blank";
+    // if(!data.password) errors.password = "Can't be blank";
     return errors;
   }
 
   render() {
     const { data, errors, loading } = this.state;
+    console.log(this.props);
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
         {errors.global && (
@@ -60,38 +70,23 @@ class LoginForm extends Component {
           </Message>
         )}
 
-        <Form.Field error={!!errors.username}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="ali"
-            value={data.username}
-            onChange={this.onChange.bind(this)}
+        <Form.Field 
+          control={TextArea} 
+          id="code"
+          name="code"
+          placeholder=""
+          value={data.code}
+          onChange={this.onChange.bind(this)}
           />
-          {errors.username && <InlineError text={errors.username} />}
-        </Form.Field>
-
-        <Form.Field error={!!errors.password}>
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password"
-            placeholder="Your password"
-            value={data.password}
-            onChange={this.onChange.bind(this)}
-          />
-          {errors.password && <InlineError text={errors.password} />}
-        </Form.Field>
-
-
-        <Button primary>Login</Button>
+        <Button primary>Submit</Button>
       </Form>
     );
   }
 }
 
-LoginForm.propTypes = {
+CodeInfoForm.propTypes = {
   submit: PropTypes.func.isRequired,
+  code: PropTypes.string.isRequired,
 }
 
-export default LoginForm;
+export default CodeInfoForm;

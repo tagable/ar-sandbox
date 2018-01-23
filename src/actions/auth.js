@@ -19,10 +19,11 @@ export const logout = () => dispatch => {
   dispatch(userLoggedOut());
 };
 
-export const confirm = (token) => (dispatch) => api.user.confirm(token).then(user => {
-  localStorage.arabsandboxJWT = user.token;
-  dispatch(userLoggedIn(user))
-});
+export const confirm = (token) => (dispatch) => 
+  api.user.confirm(token).then(user => {
+    localStorage.arabsandboxJWT = user.token;
+    dispatch(userLoggedIn(user))
+  });
 
 export const resetPasswordRequest = ({email}) => () => api.user.resetPasswordRequest(email)
 

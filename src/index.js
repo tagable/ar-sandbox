@@ -24,6 +24,7 @@ if (localStorage.arabsandboxJWT) {
   const payload = decode(localStorage.arabsandboxJWT);
   const user = {
     token: localStorage.arabsandboxJWT,
+    _id: payload._id,
     email: payload.email,
     confirmed: payload.confirmed
   };
