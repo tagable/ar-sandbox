@@ -2,19 +2,27 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Segment } from 'semantic-ui-react'
-import {loadCoderInfo, submitCode} from '../../../actions/coders';
-import CodeInfoForm from '../../forms/CodeInfoForm';
+import {loadCoderInfo, submitCode, clearCodeObj} from '../../../actions/coders';
+import CoderTag from '../../../utils/selectCoderTag';
+
 
 export class CodeInfoPage extends Component {
   state = {
     data: {
       groupId: this.props.match.params.groupId,
-      titleId: this.props.match.params.titleId, 
+      titleId: this.props.match.params.titleId,
       token: localStorage.arabsandboxJWT,
     },
+    loading: true
   }
   componentDidMount() {
-    this.props.loadCoderInfo(this.state.data)
+    this.setState({
+      loading: false
+    })
+    this.props.clearCodeObj();
+    this.props.loadCoderInfo(this.state.data).then(() => {
+      this.setState({loading: true})
+    })
   }
 
   submit = (myCode) => {
@@ -24,23 +32,18 @@ export class CodeInfoPage extends Component {
       codeId: this.props.coder._id
     }
 
-    return this.props.submitCode(data)
-      // .then(res => console.log("res", res))
-      // .catch(res => res)
+    return this.props.submitCode(data);
   }
 
-
-
   render() {
+    const {loading} = this.state;
+    // console.log("CodeInfoPage", this.props);
     return (
       <Container>
         <h1>CodeInfoPage</h1>
-        <h3>{this.props.coder.title}</h3>
-        <Segment>{this.props.coder.desc}</Segment>
-        <CodeInfoForm 
-          submit={this.submit}
-          code={this.props.coder.code || ""}
-        />
+        
+
+        <Segment>{CoderTag(this.props, this.submit)}</Segment>
       </Container>
     )
   }
@@ -65,8 +68,9 @@ CodeInfoPage.propTypes = {
     groupId: 0,
     title: PropTypes.string,
     desc: PropTypes.string,
-    result: PropTypes.string,   
+    result: PropTypes.string,
   }).isRequired,
+  clearCodeObj: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -75,4 +79,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {loadCoderInfo, submitCode})(CodeInfoPage);
+export default connect(mapStateToProps, {loadCoderInfo, submitCode, clearCodeObj})(CodeInfoPage);

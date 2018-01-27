@@ -17,12 +17,12 @@ import MyNav from './basicComp/MyNav';
 const App = ({location}) => (
 <div className="App">
   <MyNav/>
-  <Route location={location} path="/" exact component={HomePage}/>
-  <GuestRoute location={location} path="/signup" exact component={SignupPage}/>
-  <GuestRoute location={location} path="/login" exact component={LoginPage}/>
-  <GuestRoute location={location} path="/forget_password" exact component={ForgetPasswordPage}/>
-  <GuestRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage}/>
-  <GuestRoute location={location} path="/reset_password/:token" exact component={ResetPasswordPage}/>
+  <Route location={location} path="/" exact component={HomePage} />
+  <GuestRoute location={location} path="/signup" exact component={SignupPage} />
+  <GuestRoute location={location} path="/login" exact component={LoginPage} />
+  <GuestRoute location={location} path="/forget_password" exact component={ForgetPasswordPage} />
+  <GuestRoute location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
+  <GuestRoute location={location} path="/reset_password/:token" exact component={ResetPasswordPage} />
   <UserRoute location={location} path="/code-list" exact component={CodePage} />
   <UserRoute location={location} path="/code-info/:groupId/:titleId" exact component={CodeInfoPage} />
 

@@ -4,9 +4,8 @@ import {BrowserRouter, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import  { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-// import decode from 'jwt-decode';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import decode from 'jwt-decode';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './reducers';
 
@@ -24,6 +23,7 @@ if (localStorage.arabsandboxJWT) {
   const payload = decode(localStorage.arabsandboxJWT);
   const user = {
     token: localStorage.arabsandboxJWT,
+    username: payload.username,
     _id: payload._id,
     email: payload.email,
     confirmed: payload.confirmed

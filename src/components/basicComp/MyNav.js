@@ -76,7 +76,7 @@ class MyNav extends Component {
         <Container>
           {isAuthenticated && !isConfirmed && <Message
             icon='inbox'
-            size="medium"
+            size="small"
             header='Have you confirmed you email with us?'
             content='Please check your email to confirm your email with us'
           />}

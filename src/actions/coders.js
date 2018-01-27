@@ -1,4 +1,4 @@
-import { CODER_LOADED_LIST, CODER_LOADED_INFO, CODER_LOADED_SUBMIT } from './types';
+import { CODER_LOADED_LIST, CODER_LOADED_INFO, CODER_LOADED_SUBMIT, CLEAR_CODE_OBJ } from './types';
 import api from './api';
 
 export const codeListLoaded = (coders) => ({
@@ -9,6 +9,11 @@ export const codeListLoaded = (coders) => ({
 export const coderInfoLoaded = (coder) => ({
 	type: CODER_LOADED_INFO,
 	coder
+});
+
+export const clearCodeObjAction = () => ({
+	type: CLEAR_CODE_OBJ,
+	coder: {}
 });
 
 export const coderSubmitLoaded = (coder) => ({
@@ -30,3 +35,8 @@ export const submitCode = (data) => (dispatch) =>
 	api.coder.submitCode(data).then(code => {
 		dispatch(coderInfoLoaded(code))
 	})
+
+export const clearCodeObj = () => (dispatch) => {
+	dispatch(clearCodeObjAction())
+}
+	
